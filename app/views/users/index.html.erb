@@ -12,7 +12,9 @@
       <td><%= user.lastname %></td>
       <td><%= user.email %></td>
       <td><%= user.email_confirmed %></td>
-      <td><%= link_to 'delete', user, method: :delete, class: "btn btn-mini btn-danger" %></td>
+      <td><%= link_to 'delete', user, method: :delete, class: "btn btn-mini btn-danger" %>
+      <%= link_to 'edit', edit_user_path(user), method: :edit, class: "btn btn-mini btn-danger" %>
+      </td>
       <td></td>
     </tr>
   <% end %>
