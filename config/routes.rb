@@ -4,6 +4,11 @@ Myapp::Application.routes.draw do
 
   get "sign_up" => "users#new", :as => "sign_up"
   root :to => "users#new"
-  resources :users
+  resources :users do
+    member do
+      get :confirm_email
+    end
+  end
+
   resources :sessions
 end

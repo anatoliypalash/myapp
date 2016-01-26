@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160125145401) do
+ActiveRecord::Schema.define(version: 20160126091931) do
 
   create_table "users", force: true do |t|
     t.string   "email"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 20160125145401) do
     t.datetime "updated_at"
     t.string   "firstname"
     t.string   "lastname"
+    t.boolean  "email_confirmed", default: false
+    t.string   "confirm_token"
   end
 
 end
