@@ -1,0 +1,15 @@
+
+<div class="row">
+
+  <div class="col-md-6 col-md-offset-3">
+    <h1>User profile</h1>
+
+    <p><b>Name:</b> <%= @user.firstname + " " +  @user.lastname %></p>
+    <p><b>Email:</b> <%= @user.email %></p>
+
+    <%= link_to 'Back', users_path %>
+    <% if current_user.admin? || current_user.id == @user.id %>
+      | <%= link_to "Edit profile", edit_user_path %>
+    <% end %>
+  </div>
+</div>

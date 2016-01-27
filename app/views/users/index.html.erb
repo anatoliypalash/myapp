@@ -2,7 +2,7 @@
 
 <table class="table table-hover">
   <thead>
-    <tr><th>#</th><th>Firstname</th><th>Lastname</th><th>Email</th><th>Confirmed</th><th>Actions</th></tr>
+    <tr><th>#</th><th>Firstname</th><th>Lastname</th><th>Email</th><% if current_user.admin? %><th>Confirmed</th><% end %><th>Actions</th></tr>
  </thead>
   <tbody>
   <% @users.each_with_index do |user, index| %>
@@ -11,9 +11,14 @@
       <td><%= user.firstname %></td>
       <td><%= user.lastname %></td>
       <td><%= user.email %></td>
+      <% if current_user.admin? %>
       <td><%= user.email_confirmed %></td>
-      <td><%= link_to 'delete', user, method: :delete, class: "btn btn-mini btn-danger" %>
-      <%= link_to 'edit', edit_user_path(user), class: "btn btn-mini btn-danger" %>
+      <% end %>
+      <td><%= link_to 'show', user_path(user), class: "btn btn-mini btn-info" %>
+        <% if current_user.admin? %>
+        <%= link_to 'edit', edit_user_path(user), class: "btn btn-mini btn-warning" %>
+        <%= link_to 'delete', user, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-mini btn-danger" %>
+        <% end %>
       </td>
       <td></td>
     </tr>
