@@ -29,8 +29,17 @@ class UsersController < ApplicationController
 
   end
 
+  def update_row_order
+    @user = User.find(user_params[:user_id])
+    @user.row_order_position = user_params[:row_order_position]
+    @user.save
+
+    render nothing: true # this is a POST action, updates sent via AJAX, no view rendered
+  end
+
   def index
-    @users = User.all
+    @users = User.order(params[:sort].to_s + " " + params[:direction].to_s)
+    #@users = User.all
   end
 
   def edit

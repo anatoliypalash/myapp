@@ -26,6 +26,9 @@ gem 'turbolinks'
 
 gem 'paperclip'
 
+gem 'ranked-model'
+
+gem 'jquery-ui-rails', '~> 4.2.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
