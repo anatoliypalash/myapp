@@ -21,13 +21,9 @@ ActiveRecord::Schema.define(version: 20160127142739) do
     t.datetime "updated_at"
     t.string   "firstname"
     t.string   "lastname"
-    t.boolean  "email_confirmed",     default: false
+    t.boolean  "email_confirmed", default: false
     t.string   "confirm_token"
-    t.boolean  "admin",               default: false
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
+    t.boolean  "admin",           default: false
     t.integer  "row_order"
   end
 
