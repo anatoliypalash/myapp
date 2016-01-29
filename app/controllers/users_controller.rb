@@ -38,7 +38,8 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.order(params[:sort].to_s + " " + params[:direction].to_s)
+    @users = User.order(params[:sort].to_s + " " + params[:direction].to_s).rank(:row_order).all
+    #@users = User.rank(:row_order).all
     #@users = User.all
   end
 
@@ -64,6 +65,15 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.destroy
     redirect_to :action => 'index'
+  end
+
+   def sort
+    User.all.each do |spec|
+      if position = params[:specifications].index(spec.id.to_s)
+        spec.update_attribute(:position, position + 1) unless spec.position == position + 1
+      end
+    end
+    render :nothing => true, :status => 200
   end
 
   private

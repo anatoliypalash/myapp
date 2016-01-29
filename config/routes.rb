@@ -4,7 +4,8 @@ Myapp::Application.routes.draw do
   get "sign_up" => "users#new", :as => "sign_up"
   root :to => "sessions#new"
   resources :users do
-     post :update_row_order, on: :collection
+    post :update_row_order, on: :collection
+     post :sort, on: :collection
     member do
       get :confirm_email
     end

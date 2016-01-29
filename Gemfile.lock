@@ -28,10 +28,6 @@ GEM
     arel (4.0.2)
     bcrypt-ruby (3.0.1)
     builder (3.1.4)
-    climate_control (0.0.3)
-      activesupport (>= 3.0)
-    cocaine (0.5.8)
-      climate_control (>= 0.0.3, < 1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -65,15 +61,8 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.25.1)
-    mimemagic (0.3.0)
     minitest (4.7.5)
     multi_json (1.11.2)
-    paperclip (4.3.2)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
-      cocaine (~> 0.5.5)
-      mime-types
-      mimemagic (= 0.3.0)
     polyglot (0.3.5)
     rack (1.5.5)
     rack-test (0.6.3)
@@ -147,7 +136,6 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails (~> 4.2.1)
   less-rails
-  paperclip
   rails (= 4.0.0)
   ranked-model
   sass-rails (~> 4.0.0)
