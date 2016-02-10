@@ -30,23 +30,23 @@ class UsersController < ApplicationController
   end
 
   def update_row_order
-    #binding.pry
-
     params[:user].values.each do |u|
-      #binding.pry
-       @user = User.find(u[:user_id])
-       @user.row_order = u[:row_order_position]
-       @user.save
+      if (@sort = current_user.sorts.find_by_sort_user_id(u[:user_id]))
+        @sort.update_attribute(:sort_order, u[:row_order_position])
+      else
+        @sort = current_user.sorts.create(:sort_user_id => u[:user_id], :sort_order => u[:row_order_position])
+      end
     end
-    # @user = User.find(params[:user][:user_id])
-    # @user.row_order = params[:user][:row_order_position]
-    # @user.save
 
     render nothing: true # this is a POST action, updates sent via AJAX, no view rendered
   end
 
   def index
-    @users = User.order(params[:sort].to_s + " " + params[:direction].to_s)
+    if (params[:sort])
+      @users = User.order(params[:sort].to_s + " " + params[:direction].to_s)
+    else
+      @users = User.joins("LEFT JOIN sorts ON (users.id = sorts.sort_user_id AND #{current_user.id} = sorts.user_id)").order("sorts.sort_order asc")
+    end
     #@users = User.rank(:row_order).all
     #@users = User.all
   end

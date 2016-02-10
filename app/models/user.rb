@@ -3,7 +3,8 @@ class User < ActiveRecord::Base
 	include RankedModel
   ranks :row_order
   has_many :sorts
-  default_scope order('row_order ASC')
+  #default_scope order('row_order ASC')
+  #default_scope includes(:sorts).order('sorts.sort_order ASC')
 
 	attr_accessor :password
 	before_save :encrypt_password
