@@ -31,9 +31,16 @@ class UsersController < ApplicationController
 
   def update_row_order
     #binding.pry
-    @user = User.find(params[:user][:user_id])
-    @user.row_order_position = params[:user][:row_order_position]
-    @user.save
+
+    params[:user].values.each do |u|
+      #binding.pry
+       @user = User.find(u[:user_id])
+       @user.row_order = u[:row_order_position]
+       @user.save
+    end
+    # @user = User.find(params[:user][:user_id])
+    # @user.row_order = params[:user][:row_order_position]
+    # @user.save
 
     render nothing: true # this is a POST action, updates sent via AJAX, no view rendered
   end

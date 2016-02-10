@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160127142739) do
+ActiveRecord::Schema.define(version: 20160210093252) do
+
+  create_table "sorts", force: true do |t|
+    t.integer "user_id"
+    t.integer "sort_user_id"
+    t.integer "sort_order"
+  end
+
+  add_index "sorts", ["user_id"], name: "index_sorts_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email"
@@ -21,9 +29,13 @@ ActiveRecord::Schema.define(version: 20160127142739) do
     t.datetime "updated_at"
     t.string   "firstname"
     t.string   "lastname"
-    t.boolean  "email_confirmed", default: false
+    t.boolean  "email_confirmed",     default: false
     t.string   "confirm_token"
-    t.boolean  "admin",           default: false
+    t.boolean  "admin",               default: false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.integer  "row_order"
   end
 

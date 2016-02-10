@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
 
 	include RankedModel
   ranks :row_order
+  has_many :sorts
+  default_scope order('row_order ASC')
 
 	attr_accessor :password
 	before_save :encrypt_password
@@ -12,9 +14,6 @@ class User < ActiveRecord::Base
 	validates_presence_of :email
 	validates_uniqueness_of :email
 	validates_presence_of :firstname, :lastname
-
-	#has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#" }, :default_url => "/images/:style/missing.png"
-  #validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
 	def encrypt_password
 		if password.present?
