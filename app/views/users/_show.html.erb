@@ -1,0 +1,16 @@
+
+<div class="modal-dialog">
+
+
+  <div class="modal-content" style="padding:20px">
+   <h1>User profile</h1>
+
+    <p><b>Name:</b> <%= @user.firstname + " " +  @user.lastname %></p>
+    <p><b>Email:</b> <%= @user.email %></p>
+
+    <%= link_to 'Back', users_path %>
+    <% if current_user.admin? || current_user.id == @user.id %>
+      | <%= link_to "Edit profile", edit_user_path, remote: true %>
+    <% end %>
+  </div>
+</div>

@@ -11,8 +11,8 @@
             <% end %>
         </li>
         <li class="divider"></li>
-        <li><%= link_to "Show profile", current_user %></li>
-        <li><%= link_to "Edit profile", edit_user_path(current_user) %></li>
+        <li><%= link_to "Show profile", current_user, remote: true %></li>
+        <li><%= link_to "Edit profile", edit_user_path(current_user), remote: true %></li>
         <li class="divider"></li>
         <li><%= link_to "Log out", log_out_path %></li>
       </ul>

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authorize, :only => [:index, :destroy]
+respond_to :html, :xml, :json
 
   def new
   	@user = User.new
@@ -59,10 +60,18 @@ class UsersController < ApplicationController
   end
 
   def update
+    if (params[:sort])
+      @users = User.order(params[:sort].to_s + " " + params[:direction].to_s)
+    else
+      @users = User.joins("LEFT JOIN sorts ON (users.id = sorts.sort_user_id AND #{current_user.id} = sorts.user_id)").order("sorts.sort_order asc")
+    end
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      flash[:success] = "Info updated successfully!"
-      redirect_to users_path
+      #flash[:success] = "Info updated successfully!"
+      render :template => 'users/update.js.erb'
+      #redirect_to users_path
+      #respond_with(@user, :location => users_path)
+      #render :template => 'users/update.js.erb'
     else
       render "edit"
     end
@@ -82,10 +91,10 @@ class UsersController < ApplicationController
     end
     render :nothing => true, :status => 200
   end
-
-  private
-
-   def user_params
+ def user_params
     params.require(:user).permit(:email, :firstname, :lastname, :password, :password_confirmation, :confirm_token, :admin, :email_confirmed )
   end
+  private
+
+
 end

@@ -13,26 +13,8 @@
       <th>Actions</th>
     </tr>
  </thead>
-  <tbody >
-  <% @users.each_with_index do |user, index| %>
-    <tr data-item-id=<%= "#{user.id}" %> class="item">
-      <td><%= index+1 %></td>
-      <td><%= user.firstname %></td>
-      <td><%= user.lastname %></td>
-      <td><%= user.email %></td>
-      <% if current_user.admin? %>
-      <td><%= user.email_confirmed %></td>
-      <% end %>
-      <td>
-        <%= link_to 'show', user_path(user), remote: true , class: "btn btn-mini btn-info" %>
-
-        <% if current_user.admin? %>
-        <%= link_to 'edit', edit_user_path(user), remote: true, class: "btn btn-mini btn-warning" %>
-        <%= link_to 'delete', user, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-mini btn-danger" %>
-        <% end %>
-      </td>
-   </tr>
-  <% end %>
+  <tbody class="users-index" >
+  <%= render "index" %>
   </tbody>
 </table>
 <div id="product-modal" class="modal fade"></div>
