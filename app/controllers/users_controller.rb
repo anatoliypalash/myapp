@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   before_filter :authorize, :only => [:index, :destroy]
 
   def new

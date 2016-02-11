@@ -23,9 +23,11 @@
       <% if current_user.admin? %>
       <td><%= user.email_confirmed %></td>
       <% end %>
-      <td><%= link_to 'show', user_path(user), class: "btn btn-mini btn-info" %>
+      <td>
+        <%= link_to 'show', user_path(user), remote: true , class: "btn btn-mini btn-info" %>
+
         <% if current_user.admin? %>
-        <%= link_to 'edit', edit_user_path(user), class: "btn btn-mini btn-warning" %>
+        <%= link_to 'edit', edit_user_path(user), remote: true, class: "btn btn-mini btn-warning" %>
         <%= link_to 'delete', user, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-mini btn-danger" %>
         <% end %>
       </td>
@@ -33,7 +35,7 @@
   <% end %>
   </tbody>
 </table>
-
+<div id="product-modal" class="modal fade"></div>
 <script type="text/javascript" charset="utf-8">
   new User.Sort()
 </script>
