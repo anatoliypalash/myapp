@@ -3,33 +3,41 @@
 
 
   <div class="modal-content" style="padding:20px">
-    <h3><%= "Editing #{@user.firstname + " " + @user.lastname}" %></h3>
-      <%= form_for @user, remote: true, html: { style: "display:inline;" } do |f| %>
+    <%= link_to "X", "#", class: "btn", style: "float:right;", data: {dismiss: "modal"} %>
+    <!--<legend style="text-align:center;"><%= "Editing #{@user.firstname + " " + @user.lastname}" %></legend> -->
+      <%= form_for @user, remote: true, html: { style: "display:inline;", :id => "EditForm" } do |f| %>
+      <fieldset>
+        <legend>Editing account info</legend>
+        <%= f.label :firstname %>
+        <%= f.text_field :firstname, class: 'form-control' %>
 
-      <%= f.label :firstname %>
-      <%= f.text_field :firstname, class: 'form-control' %>
+        <%= f.label :lastname %>
+        <%= f.text_field :lastname, class: 'form-control' %>
 
-      <%= f.label :lastname %>
-      <%= f.text_field :lastname, class: 'form-control' %>
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control' %>
+        <br>
+      </fieldset>
+      <fieldset>
+        <legend>Password changing</legend>
+        <% if current_user.admin? %>
 
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
-      <% if current_user.admin? %>
+          <%= f.label "is Confirmed ?" %> <br />
+          <%= f.check_box :email_confirmed %> <br />
 
-        <%= f.label "is Confirmed ?" %> <br />
-        <%= f.check_box :email_confirmed %> <br />
+          <%= f.label "is Admin ?" %> <br />
+          <%= f.check_box :admin %> <br />
+        <% end %>
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control' %>
 
-        <%= f.label "is Admin ?" %> <br />
-        <%= f.check_box :admin %> <br />
-      <% end %>
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
-
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
-<br>
-      <%= f.submit "Save changes", class: "btn btn-primary" %>
-      <%= link_to "Cancel", "#", class: "btn", data: {dismiss: "modal"} %>
+        <%= f.label :password_confirmation, "Confirmation" %>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+        <br>
+        <%= f.submit "Save changes", class: "btn btn-success", name:  "SaveAccount", style: "float:right;"   %>
+      </fieldset>
     <% end %>
   </div>
 </div>
+
+

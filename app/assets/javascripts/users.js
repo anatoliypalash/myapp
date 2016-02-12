@@ -2,6 +2,11 @@ $(document).on('ready, page:load', function(){
   if ($('#sortable').length) User.Sort();
 
 })
+$(function(){
+  $( "#product-modal" ).on('show.bs.modal', function(){
+    $("#EditForm").formToWizard({ submitButton: 'SaveAccount' });
+  });
+});
 
 var User = {}
 
@@ -41,9 +46,7 @@ User.Sort = function() {
         console.log(users);
         var item_id, position;
         item_id = ui.item.data('item-id');
-        //console.log(item_id);
         position = ui.item.index();
-        //console.log(position);
         return $.ajax({
           type: 'POST',
           url: '/users/update_row_order/',

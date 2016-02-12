@@ -3,6 +3,8 @@
 
 
   <div class="modal-content" style="padding:20px">
+        <%= link_to "X", "#", class: "btn", style: "float:right;", data: {dismiss: "modal"} %>
+
    <h1>User profile</h1>
 
     <p><b>Name:</b> <%= @user.firstname + " " +  @user.lastname %></p>
