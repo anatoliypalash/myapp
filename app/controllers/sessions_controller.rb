@@ -4,6 +4,7 @@ class SessionsController < ApplicationController
 
   def create
   	user = User.authenticate(params[:email], params[:password])
+
   	if user
       if user.email_confirmed
     		session[:user_id] = user.id
@@ -15,6 +16,12 @@ class SessionsController < ApplicationController
   		flash.now.alert = "Invalid email or password"
   		render "new"
   	end
+  end
+
+   def create_fb
+    user = User.omniauth(env['omniauth.auth'])
+    session[:user_id] = user.id
+    redirect_to users_url, :notice => "Logged in!"
   end
 
   def destroy

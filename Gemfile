@@ -53,3 +53,6 @@ gem "less-rails"
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+gem 'omniauth-facebook'
+gem 'rack-cors', :require => 'rack/cors'

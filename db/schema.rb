@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160210093252) do
+ActiveRecord::Schema.define(version: 20160215132845) do
 
   create_table "sorts", force: true do |t|
     t.integer "user_id"
@@ -37,6 +37,11 @@ ActiveRecord::Schema.define(version: 20160210093252) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer  "row_order"
+    t.string   "provider"
+    t.integer  "uid"
+    t.string   "image"
+    t.string   "token"
+    t.datetime "expires_at"
   end
 
 end

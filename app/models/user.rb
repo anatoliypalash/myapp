@@ -38,6 +38,21 @@ class User < ActiveRecord::Base
 		save!(:validate => false)
 	end
 
+	def self.omniauth(auth)
+		#binding.pry
+    where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.email = auth.info.email
+      user.firstname = auth.info.name.partition(" ").first
+      user.lastname = auth.info.name.partition(" ").last
+      user.image = auth.info.image
+      user.token = auth.credentials.token
+      user.expires_at = Time.at(auth.credentials.expires_at)
+      user.save!
+    end
+  end
+
 	private
 
 	def confirmation_token
