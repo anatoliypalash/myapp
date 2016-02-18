@@ -49,7 +49,9 @@ class User < ActiveRecord::Base
       user.image = auth.info.image
       user.token = auth.credentials.token
       user.expires_at = Time.at(auth.credentials.expires_at)
-      user.save!
+      user.email_confirmed = true
+      #user.save!
+      user.save(:validate => false)
     end
   end
 
