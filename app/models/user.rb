@@ -6,6 +6,14 @@ class User < ActiveRecord::Base
   #default_scope order('row_order ASC')
   #default_scope includes(:sorts).order('sorts.sort_order ASC')
 
+  include Tire::Model::Search
+  include Tire::Model::Callbacks
+
+  mapping do
+    indexes :email,           :index    => :not_analyzed
+   #indexes :published_on, :type => 'date', :include_in_all => false
+  end
+
 	attr_accessor :password
 	before_save :encrypt_password
 	before_create :confirmation_token
@@ -36,6 +44,13 @@ class User < ActiveRecord::Base
 		self.email_confirmed = true
 		self.confirm_token = nil
 		save!(:validate => false)
+	end
+
+	def self.search(params)
+		#binding.pry
+	  tire.search(load: true) do
+	    query { string params} if params.present?
+	  end
 	end
 
 	def self.omniauth(auth)

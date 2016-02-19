@@ -42,7 +42,10 @@ respond_to :html, :xml, :json
   end
 
   def index
-    if (params[:sort])
+   #binding.pry
+    if (params["query"].present?)
+      @users = User.search(params["query"])
+    elsif (params[:sort].present?)
       @users = User.order(params[:sort].to_s + " " + params[:direction].to_s)
     else
       @users = User.joins("LEFT JOIN sorts ON (users.id = sorts.sort_user_id AND #{current_user.id} = sorts.user_id)").order("sorts.sort_order asc")
