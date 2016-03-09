@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
 
   mapping do
     indexes :email,           :index    => :not_analyzed
+    indexes :firstname,       :index    => :not_analyzed
+    indexes :lastname,       :index    => :not_analyzed
+
    #indexes :published_on, :type => 'date', :include_in_all => false
   end
 
@@ -47,10 +50,17 @@ class User < ActiveRecord::Base
 	end
 
 	def self.search(params)
-		#binding.pry
-	  tire.search(load: true) do
-	    query { string params} if params.present?
-	  end
+		# binding.pry
+	  # tire.search(load: true) do
+	  #   query { string params} if params.present?
+	  # end
+	 tire.search() do
+           if (params.present? && params.match(/\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/))
+           	query { string "email:#{params}" }
+           else
+           	query { string "*#{params}*" }
+           end
+        end
 	end
 
 	def self.omniauth(auth)
